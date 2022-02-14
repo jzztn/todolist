@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div className='bg-black min-h-screen'>
-      <div className='bg-black max-w-3xl mx-auto grid grid-rows-[auto,1fr,auto] gap-10 py-10'>
+      <div className='bg-black max-w-5xl mx-auto grid grid-rows-[auto,1fr,auto] gap-10 py-10'>
         <div className='grid grid-cols-[1fr,auto] gap-2'>
           <input
             className='w-full outline-none py-4 pl-4 rounded-md'
