@@ -18,13 +18,12 @@ const TodoContextProvider = ({ children }) => {
   const id = Math.floor(Math.random() * 100000000000)
 
   // Add Todo in the List
-  const handleAddTodo = (e) => {
+  const handleAddTodo = () => {
     if (input !== '') {
-      setTodo([{ id: id, message: input, isDone: false },...todo, ]),
-      setDisplayTodo([{ id: id, message: input, isDone: false },...todo, ])
+      setTodo([...todo, { id: id, message: input, isDone: false }]),
+      setDisplayTodo([...todo, { id: id, message: input, isDone: false }])
       setInput('')
-    }
-    
+    } 
   }
 
   // Delete a Single Todo
@@ -49,7 +48,7 @@ const TodoContextProvider = ({ children }) => {
         return {
           ...todo,
           isDone:true
-        }
+        } 
       }
       return todo
     })
@@ -72,7 +71,6 @@ const TodoContextProvider = ({ children }) => {
   }
 
   // To Show All Unchecked Todos
-
   const handleShowUnchecked = () => {
     let uncheckedTodos = []
     uncheckedTodos = todo.filter(todo => todo.isDone === false)
@@ -121,11 +119,29 @@ const TodoContextProvider = ({ children }) => {
     setTodo(updatedList)
     setDisplayTodo(updatedList)
   }
+  
+  // To Track Selected Todos
+  const handleSeletedTodos = (e,id) => {
+    let updatedList = []
+
+    updatedList = todo.map((todo) => {
+      if (todo.id === id) {
+        if(e.type.checked) {
+          return {
+            ...todo,
+            isDone:true
+          } 
+        }
+      }
+      return todo
+    })
+    setTodo(updatedList)
+    setDisplayTodo(updatedList)
+  }
 
   // To Delete Selected Todos
   const handleDeleteSelected = () => {
     let updatedList = []
-
     setShowCheckBox(false)
     updatedList = todo.filter(todo => todo.isDone === false)
     setTodo(updatedList)
@@ -156,6 +172,7 @@ const TodoContextProvider = ({ children }) => {
         handleDeleteAll,
         handleCheckedAll,
         handleUncheckedAll,
+        handleSeletedTodos,
         handleDeleteSelected,
         showCheckBox,
         handleShowCheckbox,

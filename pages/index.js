@@ -17,6 +17,7 @@ const Home = () => {
     handleDeleteAll,
     handleCheckedAll,
     handleUncheckedAll,
+    handleSeletedTodos,
     handleDeleteSelected,
     handleShowCheckbox,
     showCheckBox
@@ -24,23 +25,28 @@ const Home = () => {
 
   return (
     <div className='bg-black min-h-screen'>
+      {/* todo container */}
       <div className='bg-black max-w-5xl mx-auto grid grid-rows-[auto,1fr,auto] gap-10 py-10'>
+        {/* Search and Add Button */}
         <div className='grid grid-cols-[1fr,auto] gap-2'>
           <input
             className='w-full outline-none py-4 pl-4 rounded-md'
+            type='text'
             placeholder='Add Todo'
             value={input}
             onChange={handleUserInput}
           />
           <button
-            className='px-4 bg-green-500 text-white rounded-md hover:bg-green-600 transition-all duration-300'
+            className='px-4 bg-green-500 outline-none text-white rounded-md hover:bg-green-600 transition-all duration-300'
             onClick={handleAddTodo}
           >
             Add Todo
           </button>
         </div>
 
+        {/* Functional Buttons and Todos container */}
         <div className='grid grid-rows-[auto,1fr] gap-10'>
+          {/* Fucntional Buttons */}
           <div className='flex gap-8'>
             <Button title='All' handler={handleShowAll}/>
             <Button title='Show Complete' handler={handleShowChecked}/>
@@ -53,6 +59,7 @@ const Home = () => {
             
           </div>
 
+          {/* Todos container */}
           <ul className='flex flex-col gap-4'>
             {displayTodo.map((todo) => (
               <li
@@ -62,13 +69,13 @@ const Home = () => {
                 {showCheckBox ? (<input
                   type='checkbox'
                   className='w-5 h-5'
-                  onClick={(e) => handleIsDone(e, todo.id)}
+                  onClick={(e) => handleSeletedTodos(e, todo.id)}
                 />) : ''}
                 
                 <div className='grid grid-cols-[1fr,auto] items-center'>
                   <h1 className='text-white text-lg'>{todo.message}</h1>
                   <div className='flex gap-4 items-center'>
-                      <button
+                    <button
                       className='bg-red-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-red-600 transition-all duration-300'
                       onClick={() => handleDeleteTodo(todo.id)}
                     >
