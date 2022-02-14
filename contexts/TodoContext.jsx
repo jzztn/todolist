@@ -20,10 +20,11 @@ const TodoContextProvider = ({ children }) => {
   // Add Todo in the List
   const handleAddTodo = () => {
     if (input !== '') {
-      setTodo([...todo, { id: id, message: input, isDone: false }]),
-      setDisplayTodo([...todo, { id: id, message: input, isDone: false }])
+      setTodo([{ id: id, message: input, isDone: false },...todo, ]),
+      setDisplayTodo([{ id: id, message: input, isDone: false },...todo, ])
       setInput('')
-    } 
+    }
+    
   }
 
   // Delete a Single Todo
@@ -71,6 +72,7 @@ const TodoContextProvider = ({ children }) => {
   }
 
   // To Show All Unchecked Todos
+
   const handleShowUnchecked = () => {
     let uncheckedTodos = []
     uncheckedTodos = todo.filter(todo => todo.isDone === false)
@@ -121,17 +123,15 @@ const TodoContextProvider = ({ children }) => {
   }
   
   // To Track Selected Todos
-  const handleSeletedTodos = (e,id) => {
+  const handleSelectTodo = (id) => {
     let updatedList = []
 
     updatedList = todo.map((todo) => {
       if (todo.id === id) {
-        if(e.type.checked) {
-          return {
-            ...todo,
-            isDone:true
-          } 
-        }
+        return {
+          ...todo,
+          isDone:true
+        } 
       }
       return todo
     })
@@ -143,9 +143,13 @@ const TodoContextProvider = ({ children }) => {
   const handleDeleteSelected = () => {
     let updatedList = []
     setShowCheckBox(false)
+
     updatedList = todo.filter(todo => todo.isDone === false)
     setTodo(updatedList)
     setDisplayTodo(updatedList)
+
+    console.log(todo)
+    console.log(displayTodo)
   }
 
   // To Show Checkbox if Selec Multiple Button is clicked
@@ -172,7 +176,7 @@ const TodoContextProvider = ({ children }) => {
         handleDeleteAll,
         handleCheckedAll,
         handleUncheckedAll,
-        handleSeletedTodos,
+        handleSelectTodo,
         handleDeleteSelected,
         showCheckBox,
         handleShowCheckbox,

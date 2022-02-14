@@ -17,7 +17,7 @@ const Home = () => {
     handleDeleteAll,
     handleCheckedAll,
     handleUncheckedAll,
-    handleSeletedTodos,
+    handleSelectTodo,
     handleDeleteSelected,
     handleShowCheckbox,
     showCheckBox
@@ -69,7 +69,7 @@ const Home = () => {
                 {showCheckBox ? (<input
                   type='checkbox'
                   className='w-5 h-5'
-                  onClick={(e) => handleSeletedTodos(e, todo.id)}
+                  onClick={() => handleSelectTodo(todo.id)}
                 />) : ''}
                 
                 <div className='grid grid-cols-[1fr,auto] items-center'>
